@@ -21,7 +21,6 @@ public class MySQLUsersDao implements Users {
         }
     }
 
-
     @Override
     public User findByUsername(String username) {
         String query = "SELECT * FROM users WHERE username = ? LIMIT 1";
@@ -48,6 +47,45 @@ public class MySQLUsersDao implements Users {
             return rs.getLong(1);
         } catch (SQLException e) {
             throw new RuntimeException("Error creating new user", e);
+        }
+    }
+
+    @Override
+    public void updatePassword(User user) {
+        String query = "UPDATE users SET password = ? WHERE id = ?";
+        try{
+            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, user.getPassword());
+            stmt.setLong(2, user.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e){
+            throw new RuntimeException("Could not update Password", e);
+        }
+    }
+
+    @Override
+    public void updateEmail(User user) {
+        String query = "UPDATE users SET email = ? WHERE id = ?";
+        try{
+            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, user.getEmail());
+            stmt.setLong(2, user.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e){
+            throw new RuntimeException("Could not update Password", e);
+        }
+    }
+
+    @Override
+    public void updateUsername(String username, User user) {
+        String query = "UPDATE users SET username = ? WHERE id = ?";
+        try{
+            PreparedStatement stmt = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, username);
+            stmt.setLong(2, user.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e){
+            throw new RuntimeException("Could not update Password", e);
         }
     }
 
