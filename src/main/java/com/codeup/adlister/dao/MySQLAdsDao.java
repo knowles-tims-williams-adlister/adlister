@@ -55,6 +55,19 @@ public class MySQLAdsDao implements Ads {
             throw new RuntimeException("Error deleting the ad.", e);
         }
     }
+    public void update(Ad ad) {
+        try {
+            String updateQuery = "UPDATE ads SET user_id = ?, title = ?, description = ? WHERE id = ?";
+            PreparedStatement stmt = connection.prepareStatement(updateQuery);
+            stmt.setLong(1, ad.getUserId());
+            stmt.setString(2, ad.getTitle());
+            stmt.setString(3, ad.getDescription());
+            stmt.setLong(4, ad.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating the ad.", e);
+        }
+    }
 
     @Override
     public List<Ad> all() {
