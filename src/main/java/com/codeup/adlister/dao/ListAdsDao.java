@@ -8,6 +8,16 @@ import java.util.List;
 public class ListAdsDao implements Ads {
     private List<Ad> ads;
 
+    @Override
+    public Ad getById(long id) {
+        return null;
+    }
+
+    @Override
+    public void delete(long id) {
+
+    }
+
     public List<Ad> all() {
         if (ads == null) {
             ads = generateAds();
