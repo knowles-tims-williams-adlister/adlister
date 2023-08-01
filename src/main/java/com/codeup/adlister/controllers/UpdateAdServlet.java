@@ -15,7 +15,6 @@ public class UpdateAdServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         long adId = Long.parseLong(request.getParameter("id"));
         Ad adToUpdate = DaoFactory.getAdsDao().getById(adId);
-        request.setAttribute("ad", adToUpdate);
 
         if (adToUpdate != null) {
             request.setAttribute("ad", adToUpdate);
@@ -32,11 +31,14 @@ public class UpdateAdServlet extends HttpServlet {
 
         Ad adToUpdate = DaoFactory.getAdsDao().getById(adId);
         if (adToUpdate != null) {
-            adToUpdate.setTitle(newTitle);
-            adToUpdate.setDescription(newDescription);
-            DaoFactory.getAdsDao().update(adToUpdate);
+            // Sets the ad's current values as attributes in the request
+            request.setAttribute("ad", adToUpdate);
 
-            response.sendRedirect("/ad-detail?id=" + adId);
+            // Sets the form input values as attributes in the request
+            request.setAttribute("newTitle", newTitle);
+            request.setAttribute("newDescription", newDescription);
+
+            request.getRequestDispatcher("/WEB-INF/ads/update.jsp").forward(request, response);
         } else {
             response.sendRedirect("/error-page");
         }
