@@ -21,7 +21,18 @@
                     <li><a href="/logout">Logout</a></li>
                 </c:when>
                 <c:otherwise>
-                    <li><a href="/login">Login</a></li>
+                    <c:choose>
+                        <c:when test="${fn:contains(pageContext.request.requestURL, '/login')}">
+                            <li><a href="/register">Register</a></li>
+                        </c:when>
+                        <c:when test="${fn:contains(pageContext.request.requestURL, '/register')}">
+                            <li><a href="/login">Login</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="/register">Register</a></li>
+                            <li><a href="/login">Login</a></li>
+                        </c:otherwise>
+                    </c:choose>
                 </c:otherwise>
             </c:choose>
         </ul>
