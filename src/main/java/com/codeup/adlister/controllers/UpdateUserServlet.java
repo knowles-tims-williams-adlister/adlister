@@ -22,6 +22,7 @@ public class UpdateUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //if not user is logged in redirect to login page.
         if(req.getSession().getAttribute("user") == null) {
+            req.getSession().setAttribute("redirect", "/update-profile");
             resp.sendRedirect("/login");
             // add a return statement to exit out of the entire method.
             return;

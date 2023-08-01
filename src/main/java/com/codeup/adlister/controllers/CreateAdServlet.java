@@ -16,6 +16,7 @@ import java.io.IOException;
 public class CreateAdServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getSession().getAttribute("user") == null) {
+            request.getSession().setAttribute("redirect", "/ads/create");
             response.sendRedirect("/login");
             // add a return statement to exit out of the entire method.
             return;
