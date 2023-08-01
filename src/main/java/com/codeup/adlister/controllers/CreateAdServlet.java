@@ -9,32 +9,60 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name = "controllers.CreateAdServlet", urlPatterns = "/ads/create")
 public class CreateAdServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(request.getSession().getAttribute("user") == null) {
+        if (request.getSession().getAttribute("user") == null) {
             request.getSession().setAttribute("redirect", "/ads/create");
             response.sendRedirect("/login");
-            // add a return statement to exit out of the entire method.
             return;
         }
 
         request.getRequestDispatcher("/WEB-INF/ads/create.jsp").forward(request, response);
-
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         User loggedInUser = (User) request.getSession().getAttribute("user");
-        Ad ad = new Ad(
-                loggedInUser.getId(),
-                request.getParameter("title"),
-                request.getParameter("description")
-        );
+        String title = request.getParameter("title");
+        String description = request.getParameter("description");
+
+        // If validation fails, store the input values in the request and forward back to the form page.
+
+        if (!isValid(title, description)) {
+            request.setAttribute("title", title); // Set the title as an attribute in the request
+            request.setAttribute("description", description); // Set the description as an attribute in the request
+
+            request.getRequestDispatcher("/WEB-INF/ads/create.jsp").forward(request, response);
+            return;
+        }
+
+        // Validation passed create and insert the ad as before
+        Ad ad = new Ad(loggedInUser.getId(), title, description);
         DaoFactory.getAdsDao().insert(ad);
         response.sendRedirect("/ads");
     }
-}
+    private boolean isValid(String title, String description) {
+        if (title == null || title.trim().isEmpty()) {
+            return false;
+        }
 
+        if (description == null || description.trim().isEmpty()) {
+            return false;
+        }
+
+        int maxTitleLength = 100;
+        int maxDescriptionLength = 500;
+
+        if (title.length() > maxTitleLength) {
+            return false;
+        }
+
+        if (description.length() > maxDescriptionLength) {
+            return false;
+        }
+
+        return true; // Return true if the input is valid; false otherwise
+    }
+}
