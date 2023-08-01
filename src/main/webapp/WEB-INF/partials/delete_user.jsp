@@ -5,6 +5,6 @@
             <label for="delete">Type "Delete" In Field To DELETE Account</label>
             <input id="delete" name="delete" class="form-control" type="text">
         </div>
-        <input type="submit" class="btn btn-primary btn-block">
+        <input type="submit" class="btn btn-danger btn-block">
     </form>
 </div>
