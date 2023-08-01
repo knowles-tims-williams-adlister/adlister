@@ -18,6 +18,11 @@ public class ListAdsDao implements Ads {
 
     }
 
+    @Override
+    public void update(Ad ad) {
+
+    }
+
     public List<Ad> all() {
         if (ads == null) {
             ads = generateAds();
