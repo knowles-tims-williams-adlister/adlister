@@ -1,3 +1,4 @@
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -6,19 +7,19 @@
     </jsp:include>
 </head>
 <body>
-    <div class="container">
-        <h1>Create a new Ad</h1>
-        <form action="/ads/create" method="post">
-            <div class="form-group">
-                <label for="title">Title</label>
-                <input id="title" name="title" class="form-control" type="text">
-            </div>
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea id="description" name="description" class="form-control" type="text"></textarea>
-            </div>
-            <input type="submit" class="btn btn-block btn-primary">
-        </form>
-    </div>
+<div class="container">
+    <h1>Create a new Ad</h1>
+    <form action="/ads/create" method="post">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input id="title" name="title" class="form-control" type="text" value="${fn:escapeXml(requestScope.title)}">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" class="form-control" type="text">${fn:escapeXml(requestScope.description)}</textarea>
+        </div>
+        <input type="submit" class="btn btn-block btn-primary">
+    </form>
+</div>
 </body>
 </html>
