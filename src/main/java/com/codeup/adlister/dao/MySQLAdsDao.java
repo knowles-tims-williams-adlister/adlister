@@ -98,6 +98,39 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+//    Search Functionality
+    public List<Ad> all(String keyword, String category) {
+        PreparedStatement stmt = null;
+        try {
+            String query = "SELECT * FROM ads WHERE title LIKE ? AND category = ?";
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, "%" + keyword + "%");
+            stmt.setString(2, category);
+
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving ads with search.", e);
+        }
+    }
+
+//    Sort Functionality
+    public List<Ad> all(String keyword, String category, String sortOrder) {
+        PreparedStatement stmt = null;
+        try {
+            String query = "SELECT * FROM ads WHERE title LIKE ? AND category = ? ORDER BY " + "CASE ? " + "WHEN 'asc' THEN title " + "WHEN 'desc' " +
+                    "THEN title END";
+            stmt = connection.prepareStatement(query);
+            stmt.setString(1, "%" + keyword + "%");
+            stmt.setString(2, category);
+            stmt.setString(3, sortOrder);
+
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving ads with search and sort.", e);
+        }
+    }
     private Ad extractAd(ResultSet rs) throws SQLException {
         return new Ad(
                 rs.getLong("id"),
