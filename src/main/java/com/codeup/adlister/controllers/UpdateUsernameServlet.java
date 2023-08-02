@@ -43,7 +43,9 @@ public class UpdateUsernameServlet extends HttpServlet {
 
         //redirect if username input field is left blank
         if(inputHasErrors){
-            resp.sendRedirect("/update-username");
+            String message = "Username was left empty. Could not update!";
+            req.setAttribute("message", message);
+            req.getRequestDispatcher("/WEB-INF/update-profile.jsp").forward(req,resp);
             return;
         }
 

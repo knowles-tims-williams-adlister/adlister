@@ -55,13 +55,8 @@ public class RegisterServlet extends HttpServlet {
             // Sets the user's input as attributes in the request
             request.setAttribute("username", username);
             request.setAttribute("email", email);
-<<<<<<< HEAD
 
             request.setAttribute("message", "Invalid inputs! Please try to Register Again!");
-=======
-            request.setAttribute("password", password);
-            request.setAttribute("confirm_password", "");
->>>>>>> master
 
             request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
             return;

@@ -23,12 +23,7 @@
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-<<<<<<< HEAD
                 <input id="password" name="password" class="form-control" type="password">
-=======
-                <input id="password" name="password" class="form-control" type="password" value="${fn:escapeXml(requestScope.password)}">
-                <span class="error">${fn:escapeXml(requestScope.passwordError)}</span>
->>>>>>> master
             </div>
             <div class="form-group">
                 <label for="confirm_password">Confirm Password</label>

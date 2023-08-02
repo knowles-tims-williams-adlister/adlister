@@ -58,7 +58,9 @@ public class UpdateUserPasswordServelet extends HttpServlet {
 
         // if not validated send back to update form page.
         if(inputHasErrors){
-            resp.sendRedirect("/update-password");
+            String message = "Could not update password!";
+            req.setAttribute("message", message);
+            req.getRequestDispatcher("/WEB-INF/update-profile.jsp").forward(req,resp);
             return;
         }
 
@@ -80,7 +82,9 @@ public class UpdateUserPasswordServelet extends HttpServlet {
 
             resp.sendRedirect("/logout");
         } else {
-            resp.sendRedirect("/update-password");
+            String message = "Old Password does not match! Please try again";
+            req.setAttribute("message", message);
+            req.getRequestDispatcher("/WEB-INF/update-profile.jsp").forward(req,resp);
         }
     }
 }
