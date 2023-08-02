@@ -9,7 +9,8 @@ CREATE TABLE users (
     email VARCHAR(240) NOT NULL,
     password VARCHAR(255) NOT NULL,
     PRIMARY KEY (id),
-    UNIQUE (username)
+    UNIQUE (username),
+    UNIQUE (email)
 );
 
 CREATE TABLE ads (
