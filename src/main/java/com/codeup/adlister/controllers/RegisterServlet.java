@@ -24,18 +24,44 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String passwordConfirmation = request.getParameter("confirm_password");
 
-        // validate input
-        boolean inputHasErrors = username.isEmpty()
-            || email.isEmpty()
-            || password.isEmpty()
-            || (! password.equals(passwordConfirmation));
+        // Validate input
+        boolean inputHasErrors = false;
+
+        // Checks if username is empty or already exists
+        if (username.isEmpty() || DaoFactory.getUsersDao().findByUsername(username) != null) {
+            inputHasErrors = true;
+            request.setAttribute("usernameError", "Invalid username or username already taken.");
+        }
+
+        // Checks if email is empty or already exists
+        if (email.isEmpty() || DaoFactory.getUsersDao().findByEmail(email) != null) {
+            inputHasErrors = true;
+            request.setAttribute("emailError", "Invalid email or email already registered.");
+        }
+
+        // Checks if password is empty
+        if (password.isEmpty()) {
+            inputHasErrors = true;
+            request.setAttribute("passwordError", "Password cannot be empty.");
+        }
+
+        // Checks if password confirmation matches password
+        if (!password.equals(passwordConfirmation)) {
+            inputHasErrors = true;
+            request.setAttribute("passwordConfirmError", "Password confirmation does not match.");
+        }
 
         if (inputHasErrors) {
             // Sets the user's input as attributes in the request
             request.setAttribute("username", username);
             request.setAttribute("email", email);
+<<<<<<< HEAD
 
             request.setAttribute("message", "Invalid inputs! Please try to Register Again!");
+=======
+            request.setAttribute("password", password);
+            request.setAttribute("confirm_password", "");
+>>>>>>> master
 
             request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
             return;

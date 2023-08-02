@@ -9,7 +9,8 @@ CREATE TABLE users (
     email VARCHAR(240) NOT NULL,
     password VARCHAR(255) NOT NULL,
     PRIMARY KEY (id),
-    UNIQUE (username)
+    UNIQUE (username),
+    UNIQUE (email)
 );
 
 CREATE TABLE ads (
@@ -21,3 +22,8 @@ CREATE TABLE ads (
     FOREIGN KEY (user_id) REFERENCES users(id)
         ON DELETE CASCADE
 );
+SHOW DATABASES;
+CREATE DATABASE adlister_db;
+SELECT current_user;
+CREATE USER 'adlister_user'@'localhost' IDENTIFIED BY 'codeup';
+GRANT ALL ON adlister_db.* TO 'adlister_user'@'localhost';
