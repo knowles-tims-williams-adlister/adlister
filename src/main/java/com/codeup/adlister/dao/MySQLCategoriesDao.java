@@ -26,19 +26,14 @@ public class MySQLCategoriesDao implements Categories {
 
     @Override
     public List<Category> getCategoriesByAdId(long adId) {
-        List<Category> categories = new ArrayList<>();
-        PreparedStatement stmt = null;
-
         try {
-            String query = "SELECT c.id, c.name " +
+            String query = "SELECT id, name " +
                     "FROM categories c " +
                     "JOIN ad_categories ac ON c.id = ac.category_id " +
                     "WHERE ac.ad_id = ?";
-            stmt = connection.prepareStatement(query);
+            PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setLong(1, adId);
             ResultSet rs = stmt.executeQuery();
-
-
             return createCategoriesFromResults(rs);
         } catch (SQLException e) {
             e.printStackTrace();
