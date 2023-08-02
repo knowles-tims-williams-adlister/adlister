@@ -21,7 +21,7 @@
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input id="password" name="password" class="form-control" type="password" value="${fn:escapeXml(requestScope.password)}">
+                <input id="password" name="password" class="form-control" type="password">
             </div>
             <div class="form-group">
                 <label for="confirm_password">Confirm Password</label>
@@ -30,5 +30,7 @@
             <input type="submit" class="btn btn-block btn-primary" value="Register">
         </form>
     </div>
+
+    <jsp:include page="/WEB-INF/partials/error_message.jsp"/>
 </body>
 </html>

@@ -21,5 +21,7 @@
         <button type="button" id="cancelButton">Cancel</button>
     </form>
     <div id="confirmation-message">Successfully updated!</div>
+
+    <jsp:include page="/WEB-INF/partials/error_message.jsp"/>
 </body>
 </html>
