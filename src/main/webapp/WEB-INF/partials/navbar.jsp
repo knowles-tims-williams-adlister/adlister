@@ -17,8 +17,15 @@
                             <li><a href="/profile">Profile</a></li>
                         </c:otherwise>
                     </c:choose>
-                    <li><a href="/ads">Ads</a></li>
-                    <li><a href="/logout">Logout</a></li>
+                    <c:choose>
+                        <c:when test="${fn:contains(pageContext.request.requestURL, '/create')}">
+                            <li><a href="/logout">Logout</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="/ads/create">Create Ad</a></li>
+                            <li><a href="/logout">Logout</a></li>
+                        </c:otherwise>
+                    </c:choose>
                 </c:when>
                 <c:otherwise>
                     <c:choose>
