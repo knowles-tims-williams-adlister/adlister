@@ -40,5 +40,3 @@ CREATE TABLE ad_categories
     FOREIGN KEY (ad_id) REFERENCES ads (id) ON DELETE CASCADE,
     FOREIGN KEY (category_id) REFERENCES categories (id)
 );
-
-

@@ -43,7 +43,9 @@ public class UpdateUserEmailServlet extends HttpServlet {
 
         // if it is left blank send back to page for updating profile info.
         if(inputHasErrors){
-            resp.sendRedirect("/update-email");
+            String message = "Email field was left empty. Please try again!";
+            req.setAttribute("message", message);
+            req.getRequestDispatcher("/WEB-INF/update-profile.jsp").forward(req,resp);
             return;
         }
 

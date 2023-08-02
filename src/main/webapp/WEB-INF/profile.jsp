@@ -26,11 +26,12 @@
             <div class="col-md-6">
                 <h2 class="text-secondary">${ad.title}</h2>
                 <p class="text-secondary">${ad.description}</p>
-                <a class="text-decoration-none text-dark " href="/ads/show?id=${ad.id}">Ad's Page</a>
+                <a href="/ads/show?id=${ad.id}">Show</a>
+                <a href="/deleteAd?id=${ad.id}">Delete</a>
             </div>
 
         </c:forEach>
     </div>
-
+    <jsp:include page="/WEB-INF/partials/error_message.jsp"/>
 </body>
 </html>
