@@ -13,9 +13,12 @@ public interface Ads {
 
     //update an existing ad with new data.
     void update(Ad ad);
+    void insertAdCategory(long adId, long categoryId);
 
+    List<Ad> getAdsByCategoryId(long categoryId);
     // get a list of all the ads
     List<Ad> all();
     // insert a new ad and return the new ad's id
     Long insert(Ad ad);
+
 }

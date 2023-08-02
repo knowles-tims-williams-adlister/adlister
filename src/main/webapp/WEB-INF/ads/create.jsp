@@ -1,4 +1,5 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -19,6 +20,13 @@
         <div class="form-group">
             <label for="description">Description</label>
             <textarea id="description" name="description" class="form-control" type="text">${fn:escapeXml(requestScope.description)}</textarea>
+        </div>
+        <div class="form-group">
+            <br>
+            <c:forEach items="${allCategories}" var="category">
+                <label for="category${category.id}"> ${category.name} </label>
+                <input type="checkbox" name="categories" id="category${category.id}" value="${category.id}">
+            </c:forEach>
         </div>
         <input type="submit" class="btn btn-block btn-primary">
     </form>
