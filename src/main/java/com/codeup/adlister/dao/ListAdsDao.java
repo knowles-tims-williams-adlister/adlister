@@ -3,6 +3,7 @@ package com.codeup.adlister.dao;
 import com.codeup.adlister.models.Ad;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ListAdsDao implements Ads {
@@ -54,5 +55,38 @@ public class ListAdsDao implements Ads {
             "Must have strong Java skills"
         ));
         return ads;
+    }
+
+    public Ad getById(long id) {
+        // UpdateAdServlet: Find and return the Ad with the given ID
+        return ads.stream()
+                .filter(ad -> ad.getId() == id)
+                .findFirst()
+                .orElse(null);
+    }
+
+    // DeleteAds
+    public boolean delete(long id) {
+        Iterator<Ad> iterator = ads.iterator();
+        while (iterator.hasNext()) {
+            Ad ad = iterator.next();
+            if (ad.getId() == id) {
+                iterator.remove();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void update(Ad ad) {
+        // Find and update the ad with the given ID in the list
+        for (int i = 0; i < ads.size(); i++) {
+            Ad currentAd = ads.get(i);
+            if (currentAd.getId() == ad.getId()) {
+                ads.set(i, ad);
+                break;
+            }
+        }
     }
 }

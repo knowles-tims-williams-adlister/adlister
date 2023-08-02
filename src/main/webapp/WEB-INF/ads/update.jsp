@@ -7,19 +7,24 @@
     </jsp:include>
 </head>
 <body>
-    <h2>Remove Ad</h2>
-    <form action="/ads/update" method="post" id="updateAd">
-        <input type="hidden" id="adId" value="${ad.getId()}">
-        <label for="title">${ad.getTitle()}</label>
-        <input type="text" id="title" value="${ad.getDescription()}">
-        <br>
-        <label for="description">Description</label>
-        <textarea name="description" id="description" cols="15"
-        rows="15">${ad.getDescription()}"</textarea>
-        <br>
-        <button type="button" id="updateButton">Update Ad</button>
-        <button type="button" id="cancelButton">Cancel</button>
-    </form>
-    <div id="confirmation-message">Successfully updated!</div>
+    <div>
+    <h2>Update your Ad</h2>
+        <form action="/ads/updateAd" method="post">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" id="title"
+                value="${ad.getTitle()}" name="updateTitle"
+                       class="form-control">
+            </div>
+             <div class="form-group">
+                <label for="description">Description</label>
+                <input name="updateDescription" id="description"
+                class="form-control" type="text"
+                       value="${ad.getDescription()}">
+            </div>
+                <input type="hidden" name="adId" value="${ad.getId()}">
+                <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
 </body>
 </html>
