@@ -6,22 +6,34 @@
     <jsp:include page="/WEB-INF/partials/head.jsp">
         <jsp:param name="title" value="Update an Ad" />
     </jsp:include>
+    <style>
+        #id{display: none;}
+    </style>
 </head>
 <body>
-    <h2>Remove Ad</h2>
-    <form action="/ads/update" method="post" id="updateAd">
-        <input type="hidden" name="adId" value="${ad.getId()}">
-        <label for="title">Title</label>
-        <input type="text" id="title" name="title" value="${fn:escapeXml(newTitle)}">
-        <br>
-        <label for="description">Description</label>
-        <textarea name="description" id="description" cols="15" rows="15">${fn:escapeXml(newDescription)}</textarea>
-        <br>
-        <button type="submit" id="updateButton">Update Ad</button>
-        <button type="button" id="cancelButton">Cancel</button>
+<div class="container">
+    <h2>Update Your Ad</h2>
+    <form action="/ads/updateAd" method="post">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title"
+                   value="${fn:escapeXml(newTitle)}" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea name="description" id="description" cols="30"
+             rows="15" value="${fn:escapeXml(newDescription)}"
+                      class="form-control"></textarea>
+        </div>
+            <input class="d-none" type="text" name="id" id="id"
+             value="${ad.getId()}">
+            <button type="submit" id="updateButton" name="updateButton"
+            value="update" class="btn btn-block btn-primary">Update
+            Ad</button>
+            <button type="submit" id="cancelButton" name="cancelButton"
+            value="cancel" class="btn btn-block btn-primary">Cancel</button>
     </form>
-    <div id="confirmation-message">Successfully updated!</div>
-
-    <jsp:include page="/WEB-INF/partials/error_message.jsp"/>
+</div>
+<jsp:include page="/WEB-INF/partials/error_message.jsp"/>
 </body>
 </html>
