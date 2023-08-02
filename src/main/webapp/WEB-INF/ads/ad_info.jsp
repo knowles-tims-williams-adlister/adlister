@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: jemalknowles1
@@ -8,7 +9,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Show Ad</title>
     <jsp:include page="/WEB-INF/partials/head.jsp">
         <jsp:param name="title" value="Show ad information" />
     </jsp:include>
@@ -23,9 +23,17 @@
         <div class="col-md-7">
             <%-- Displaying the ad information --%>
             <h2>Title</h2>
-            <h4>${ad.title}</h4>
-            <h5>Description</h5>
+            <h5>${ad.title}</h5>
+            <h3>Description</h3>
             <p>${ad.description}</p>
+            <div>
+                <h3>Categories</h3>
+                <c:forEach items="${categories}" var="category">
+                    <div class="col-md-3">
+                        <span class="fs-6">${category.name}</span>
+                    </div>
+                </c:forEach>
+            </div>
         </div>
         <div class="col-md-3">
             <%-- Displaying the user information --%>
@@ -36,6 +44,10 @@
         </div>
     </div>
 
+
+</div>
+<br>
+<div class="container">
     <%-- Add a link to go back to the list of ads --%>
     <a href="/ads">Back to Ads List</a>
 </div>
