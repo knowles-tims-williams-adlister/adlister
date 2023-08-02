@@ -13,6 +13,8 @@ import java.io.IOException;
 
 @WebServlet(name = "controllers.CreateAdServlet", urlPatterns = "/ads/create")
 public class CreateAdServlet extends HttpServlet {
+    private String message;
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getSession().getAttribute("user") == null) {
             request.getSession().setAttribute("redirect", "/ads/create");
@@ -34,6 +36,8 @@ public class CreateAdServlet extends HttpServlet {
             request.setAttribute("title", title); // Set the title as an attribute in the request
             request.setAttribute("description", description); // Set the description as an attribute in the request
 
+            request.setAttribute("message", message);
+
             request.getRequestDispatcher("/WEB-INF/ads/create.jsp").forward(request, response);
             return;
         }
@@ -45,10 +49,12 @@ public class CreateAdServlet extends HttpServlet {
     }
     private boolean isValid(String title, String description) {
         if (title == null || title.trim().isEmpty()) {
+            message = "Title was left empty. Please fill it out.";
             return false;
         }
 
         if (description == null || description.trim().isEmpty()) {
+            message = "Description left empty. Please fill it out.";
             return false;
         }
 
@@ -56,10 +62,12 @@ public class CreateAdServlet extends HttpServlet {
         int maxDescriptionLength = 500;
 
         if (title.length() > maxTitleLength) {
+            message = "Title is to long, please shorten it.";
             return false;
         }
 
         if (description.length() > maxDescriptionLength) {
+            message = "Description is to long, please shorten it.";
             return false;
         }
 
