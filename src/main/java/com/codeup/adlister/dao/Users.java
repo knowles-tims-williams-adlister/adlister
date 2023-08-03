@@ -5,6 +5,9 @@ import com.codeup.adlister.models.User;
 public interface Users {
     User findByEmail(String email);
     User findByUsername(String username);
+
+    User findByID(long id);
+
     Long insert(User user);
     boolean isValidUser(User user);
     void updatePassword(User user, String password);

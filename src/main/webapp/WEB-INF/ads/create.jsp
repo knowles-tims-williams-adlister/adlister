@@ -24,8 +24,10 @@
         <div class="form-group">
             <br>
             <c:forEach items="${allCategories}" var="category">
-                <label for="category${category.id}"> ${category.name} </label>
-                <input type="checkbox" name="categories" id="category${category.id}" value="${category.id}">
+                <div class="col-md-1">
+                    <input type="checkbox" name="categories" id="category${category.id}" value="${category.id}">
+                    <label for="category${category.id}"> ${category.name} </label>
+                </div>
             </c:forEach>
         </div>
         <input type="submit" class="btn btn-block btn-primary">
