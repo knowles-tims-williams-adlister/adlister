@@ -1,6 +1,5 @@
-<%@ page import="com.codeup.adlister.models.Ad" %>
-<%@ page import="com.codeup.adlister.dao.*" %>
-<%@ page import="com.codeup.adlister.models.User" %><%--
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
   Created by IntelliJ IDEA.
   User: jemalknowles1
   Date: 7/31/23
@@ -10,30 +9,47 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Show Ad</title>
     <jsp:include page="/WEB-INF/partials/head.jsp">
         <jsp:param name="title" value="Show ad information" />
     </jsp:include>
 </head>
 <body>
+<jsp:include page="/WEB-INF/partials/navbar.jsp" />
+<div class="container">
 
-<h1>Ad Information</h1>
+    <h1>Ad Information</h1>
+    <hr>
+    <div class="container">
+        <div class="col-md-7">
+            <%-- Displaying the ad information --%>
+            <h2>Title</h2>
+            <h5>${ad.title}</h5>
+            <h3>Description</h3>
+            <p>${ad.description}</p>
+            <div>
+                <h3>Categories</h3>
+                <c:forEach items="${categories}" var="category">
+                    <div class="col-md-3">
+                        <span class="fs-6">${category.name}</span>
+                    </div>
+                </c:forEach>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <%-- Displaying the user information --%>
+            <h3>User</h3>
+            <%--<p>User ID: <%= user.getId() %></p>--%>
+            <p>Name: ${user.username}</p>
+            <p>Email: ${user.email}</p>
+        </div>
+    </div>
 
-<%--<% Ad ad = (Ad) request.getAttribute("ad"); %>--%>
 
-<%--<% User user = (User) request.getAttribute("user"); %>--%>
-
-<%-- Displaying the ad information --%>
-<h2>Title: ${ad.title}</h2>
-<p>Description:  ${ad.description}</p>
-
-<%-- Displaying the user information --%>
-<h2>User Information</h2>
-<%--<p>User ID: <%= user.getId() %></p>--%>
-<p>Name: ${user.username}</p>
-<p>Email: ${user.email}</p>
-
-<%-- Add a link to go back to the list of ads --%>
-<a href="/ads">Back to Ads List</a>
+</div>
+<br>
+<div class="container">
+    <%-- Add a link to go back to the list of ads --%>
+    <a href="/ads">Back to Ads List</a>
+</div>
 </body>
 </html>

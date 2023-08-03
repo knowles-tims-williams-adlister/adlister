@@ -28,6 +28,14 @@ public class ListAdsDao implements Ads {
     public List<Ad> searchByTitle(String keyword) {
         return ads;
     }
+  
+    public void insertAdCategory(long adId, long categoryId) {
+    }
+
+    @Override
+    public List<Ad> getAdsByCategoryId(long categoryId) {
+        return null;
+    }
 
     public List<Ad> all() {
         if (ads == null) {

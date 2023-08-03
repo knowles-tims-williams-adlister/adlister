@@ -2,6 +2,7 @@ package com.codeup.adlister.controllers;
 
 import com.codeup.adlister.dao.DaoFactory;
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.Category;
 import com.codeup.adlister.models.User;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @WebServlet(name = "controllers.CreateAdServlet", urlPatterns = "/ads/create")
 public class CreateAdServlet extends HttpServlet {
@@ -21,6 +25,12 @@ public class CreateAdServlet extends HttpServlet {
             response.sendRedirect("/login");
             return;
         }
+//        List<Category> categoryList =  DaoFactory.getCategoriesDAO().all();
+//        for (Category c :
+//                categoryList) {
+//            System.out.println(c.getName());
+//        }
+        request.setAttribute("allCategories", DaoFactory.getCategoriesDAO().all());
 
         request.getRequestDispatcher("/WEB-INF/ads/create.jsp").forward(request, response);
     }
@@ -41,10 +51,20 @@ public class CreateAdServlet extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/ads/create.jsp").forward(request, response);
             return;
         }
+       Ad ad = new Ad(loggedInUser.getId(), title, description);
+        long adId = DaoFactory.getAdsDao().insert(ad); // Get the inserted ad's ID
 
+        // Associate the selected categories with the ad
+        String[] selectedCategories = request.getParameterValues("categories");
+        System.out.println(Arrays.toString(selectedCategories));
+        if (selectedCategories != null) {
+            for (String categoryIdStr : selectedCategories) {
+                long categoryId = Long.parseLong(categoryIdStr);
+                System.out.println(categoryId);
+                DaoFactory.getAdsDao().insertAdCategory(adId, categoryId);
+            }
+        }
         // Validation passed create and insert the ad as before
-        Ad ad = new Ad(loggedInUser.getId(), title, description);
-        DaoFactory.getAdsDao().insert(ad);
         response.sendRedirect("/ads");
     }
     private boolean isValid(String title, String description) {
