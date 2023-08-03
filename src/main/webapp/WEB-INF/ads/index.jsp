@@ -8,7 +8,17 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
-
+<div class="container">
+    <h2>Ad Search</h2>
+    <form action="/search" method="post">
+        <div class="form-group">
+            <label for="search">Search by ad title</label>
+            <input id="search" name="keyword" class="form-control" type="text"
+                   placeholder="title">
+        </div>
+        <input type="submit" class="btn btn-primary btn-block">
+    </form>
+</div>
 <div class="container">
     <h1>Here Are all the ads!</h1>
     <c:forEach var="ad" items="${ads}">
