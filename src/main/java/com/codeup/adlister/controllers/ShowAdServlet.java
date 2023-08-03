@@ -23,7 +23,7 @@ public class ShowAdServlet extends HttpServlet {
 
         // Assuming you have methods to fetch the ad and user data based on the ID
         Ad ad = DaoFactory.getAdsDao().getById(adId);
-        User user = (User) request.getSession().getAttribute("user");
+        User user = DaoFactory.getUsersDao().findByID(ad.getUserId());
         List<Category> categoryList = DaoFactory.getCategoriesDAO().getCategoriesByAdId(adId);
 
         // Pass the ad and user objects as attributes to the JSP

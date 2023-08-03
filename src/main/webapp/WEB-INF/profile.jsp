@@ -23,12 +23,21 @@
     <div class="container">
         <h1>Your Ads</h1>
         <c:forEach var="ad" items="${ads}">
-            <div class="col-md-6">
-                <h2 class="text-secondary">${ad.title}</h2>
-                <p class="text-secondary">${ad.description}</p>
-                <a href="/ads/show?id=${ad.id}" class="btn btn-primary">Show</a>
-                <a href="/ads/updateAd?id=${ad.id}" class="btn btn-primary">Update</a>
-                <a href="/deleteAd?id=${ad.id}" class="btn btn-danger">Delete</a>
+            <div class="col-md-6 ad-space">
+                <a href="/ads/show?id=${ad.id}" class="show-ad"><h2 class="text-secondary">${ad.title}</h2></a>
+                <p class="text-secondary larger-p">${ad.description}</p>
+                <a href="/ads/updateAd?id=${ad.id}" class="btn btn-primary ad-space">Update</a>
+                <a href="/deleteAd?id=${ad.id}" class="btn btn-danger ad-space">Delete</a>
+<%--                <div class="col-md-5">--%>
+<%--                    <form action="/ads/updateAd?id=${ad.id}">--%>
+<%--                        <button class="btn btn-primary btn-block ad-space">Update</button>--%>
+<%--                    </form>--%>
+<%--                    </div>--%>
+<%--                    <div class="col-md-5">--%>
+<%--                    <form action="/deleteAd?id=${ad.id}">--%>
+<%--                        <button class="btn btn-danger btn-block">Delete</button>--%>
+<%--                    </form>--%>
+<%--                </div>--%>
             </div>
 
         </c:forEach>

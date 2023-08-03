@@ -20,7 +20,7 @@
     <h1>Ad Information</h1>
     <hr>
     <div class="container">
-        <div class="col-md-7">
+        <div class="col-md-9">
             <%-- Displaying the ad information --%>
             <h2>Title</h2>
             <h5>${ad.title}</h5>
@@ -29,7 +29,7 @@
             <div>
                 <h3>Categories</h3>
                 <c:forEach items="${categories}" var="category">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <span class="fs-6">${category.name}</span>
                     </div>
                 </c:forEach>

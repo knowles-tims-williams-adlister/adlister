@@ -67,6 +67,19 @@ public class MySQLUsersDao implements Users {
         }
     }
 
+
+    @Override
+    public User findByID(long id) {
+        String query = "SELECT * FROM users WHERE id = ? LIMIT 1";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, id);
+            return extractUser(stmt.executeQuery());
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding a user by username", e);
+        }
+    }
+
     /**
      * When registering an Account, User info is passed in. User table is populated
      * with a new user's username, email, and password hashed. No duplicate usernames
