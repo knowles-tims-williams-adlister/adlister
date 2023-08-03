@@ -69,3 +69,9 @@ a:active {
     text-decoration: none;
     color: navy;
 }
+
+.navbar-brand {
+    font-family: "Pimpaw", Borel ;
+    font-size: 36px;
+    margin-top: 15px;
+}
