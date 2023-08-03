@@ -35,15 +35,20 @@ public class DeleteAdServlet extends HttpServlet {
          * and log them out. else, create and send a message back to the page
          * displaying a message about not deleting the user.
          */
-        if(input.equals("Delete")) {
-            System.out.println("adId = " + adId);
-            DaoFactory.getAdsDao().delete(adId);
+        if (request.getParameter("deleteButton") != null) {
+            if (input.equals("Delete")) {
+                System.out.println("adId = " + adId);
+                DaoFactory.getAdsDao().delete(adId);
 
-            response.sendRedirect("/ads");
+                response.sendRedirect("/ads");
+            } else {
+                String message = "Could not delete ad! (Delete) was not entered!";
+                request.setAttribute("message", message);
+                request.setAttribute("ad", DaoFactory.getAdsDao().getById(adId));
+                request.getRequestDispatcher("/WEB-INF/ads/delete.jsp").forward(request, response);
+            }
         } else {
-            String message = "Could not delete ad! (Delete) was not entered!";
-            request.setAttribute("message", message);
-            request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request,response);
+            response.sendRedirect("/profile");
         }
     }
 }

@@ -6,11 +6,9 @@
     <jsp:include page="/WEB-INF/partials/head.jsp">
         <jsp:param name="title" value="Update an Ad" />
     </jsp:include>
-    <style>
-        #id{display: none;}
-    </style>
 </head>
 <body>
+<jsp:include page="/WEB-INF/partials/navbar.jsp" />
 <div class="container">
     <h2>Update Your Ad</h2>
     <form action="/ads/updateAd" method="post">
