@@ -15,13 +15,12 @@
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" id="title" name="title"
-                   value="${fn:escapeXml(newTitle)}" class="form-control">
+                   value="${ad.title}" class="form-control">
         </div>
         <div class="form-group">
             <label for="description">Description</label>
             <textarea name="description" id="description" cols="30"
-             rows="15" value="${fn:escapeXml(newDescription)}"
-                      class="form-control"></textarea>
+             rows="15" class="form-control">${ad.description}</textarea>
         </div>
             <input class="d-none" type="text" name="id" id="id"
              value="${ad.getId()}">
