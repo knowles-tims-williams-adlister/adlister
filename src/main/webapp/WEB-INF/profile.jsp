@@ -26,8 +26,9 @@
             <div class="col-md-6">
                 <h2 class="text-secondary">${ad.title}</h2>
                 <p class="text-secondary">${ad.description}</p>
-                <a href="/ads/show?id=${ad.id}">Show</a>
-                <a href="/deleteAd?id=${ad.id}">Delete</a>
+                <a href="/ads/show?id=${ad.id}" class="btn btn-primary">Show</a>
+                <a href="/ads/updateAd?id=${ad.id}" class="btn btn-primary">Update</a>
+                <a href="/deleteAd?id=${ad.id}" class="btn btn-danger">Delete</a>
             </div>
 
         </c:forEach>
