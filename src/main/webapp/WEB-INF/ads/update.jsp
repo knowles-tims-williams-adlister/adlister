@@ -31,6 +31,7 @@
             value="cancel" class="btn btn-block btn-primary">Cancel</button>
     </form>
 </div>
+<jsp:include page="/WEB-INF/partials/footer.jsp" />
 <jsp:include page="/WEB-INF/partials/error_message.jsp"/>
 </body>
 </html>

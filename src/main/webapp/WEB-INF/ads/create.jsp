@@ -32,7 +32,7 @@
         </div>
         <input type="submit" class="btn btn-block btn-primary">
     </form>
-
+    <jsp:include page="/WEB-INF/partials/footer.jsp" />
     <jsp:include page="/WEB-INF/partials/error_message.jsp"/>
 </div>
 </body>
