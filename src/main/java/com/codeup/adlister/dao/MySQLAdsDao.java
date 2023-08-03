@@ -125,7 +125,6 @@ public class MySQLAdsDao implements Ads {
 //    Search Functionality
     public List<Ad> searchByTitle(String keyword) {
         PreparedStatement stmt = null;
-        System.out.println(keyword);
         try {
             String query = "SELECT * FROM ads WHERE title LIKE ?";
             stmt = connection.prepareStatement(query);
@@ -139,7 +138,6 @@ public class MySQLAdsDao implements Ads {
     }
 
     private Ad extractAd(ResultSet rs) throws SQLException {
-        System.out.println(rs.getString("title"));
         return new Ad(
                 rs.getLong("id"),
                 rs.getLong("user_id"),
@@ -153,7 +151,6 @@ public class MySQLAdsDao implements Ads {
         while (rs.next()) {
             ads.add(extractAd(rs));
         }
-        System.out.println(ads.toString());
         return ads;
     }
 }
