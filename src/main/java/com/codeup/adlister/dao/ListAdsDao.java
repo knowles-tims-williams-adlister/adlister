@@ -3,6 +3,7 @@ package com.codeup.adlister.dao;
 import com.codeup.adlister.models.Ad;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class ListAdsDao implements Ads {
@@ -24,6 +25,10 @@ public class ListAdsDao implements Ads {
     }
 
     @Override
+    public List<Ad> searchByTitle(String keyword) {
+        return ads;
+    }
+  
     public void insertAdCategory(long adId, long categoryId) {
     }
 

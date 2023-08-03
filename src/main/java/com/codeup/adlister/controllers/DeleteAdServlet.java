@@ -31,7 +31,7 @@ public class DeleteAdServlet extends HttpServlet {
         long adId = Long.parseLong(request.getParameter("id"));
 
         /**
-         * if user inputs Delete into the input field, delete the user from the DB
+         * if user input Delete into the input field, delete the user from the DB
          * and log them out. else, create and send a message back to the page
          * displaying a message about not deleting the user.
          */

@@ -5,6 +5,7 @@ import com.mysql.cj.jdbc.Driver;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MySQLAdsDao implements Ads {
@@ -122,13 +123,13 @@ public class MySQLAdsDao implements Ads {
     }
 
 //    Search Functionality
-    public List<Ad> all(String keyword, String category) {
+    public List<Ad> searchByTitle(String keyword) {
         PreparedStatement stmt = null;
+        System.out.println(keyword);
         try {
-            String query = "SELECT * FROM ads WHERE title LIKE ? AND category = ?";
+            String query = "SELECT * FROM ads WHERE title LIKE ?";
             stmt = connection.prepareStatement(query);
             stmt.setString(1, "%" + keyword + "%");
-            stmt.setString(2, category);
 
             ResultSet rs = stmt.executeQuery();
             return createAdsFromResults(rs);
@@ -137,24 +138,8 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
-//    Sort Functionality
-    public List<Ad> all(String keyword, String category, String sortOrder) {
-        PreparedStatement stmt = null;
-        try {
-            String query = "SELECT * FROM ads WHERE title LIKE ? AND category = ? ORDER BY " + "CASE ? " + "WHEN 'asc' THEN title " + "WHEN 'desc' " +
-                    "THEN title END";
-            stmt = connection.prepareStatement(query);
-            stmt.setString(1, "%" + keyword + "%");
-            stmt.setString(2, category);
-            stmt.setString(3, sortOrder);
-
-            ResultSet rs = stmt.executeQuery();
-            return createAdsFromResults(rs);
-        } catch (SQLException e) {
-            throw new RuntimeException("Error retrieving ads with search and sort.", e);
-        }
-    }
     private Ad extractAd(ResultSet rs) throws SQLException {
+        System.out.println(rs.getString("title"));
         return new Ad(
                 rs.getLong("id"),
                 rs.getLong("user_id"),
@@ -168,6 +153,7 @@ public class MySQLAdsDao implements Ads {
         while (rs.next()) {
             ads.add(extractAd(rs));
         }
+        System.out.println(ads.toString());
         return ads;
     }
 }
