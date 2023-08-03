@@ -35,6 +35,6 @@ Create a one-stop shop for your cat needs. Creat and search through posts for ca
 - [Johann Williams][2]
 - [Kofie Knowles][3]
 
-[1]: "https://www.linkedin.com/in/timsgenc/"
-[2]: "https://www.linkedin.com/in/johannwilliams/"
-[3]: "https://www.linkedin.com/in/kofie-knowles/"
+[1]: https://www.linkedin.com/in/timsgenc/
+[2]: https://www.linkedin.com/in/johannwilliams/
+[3]: https://www.linkedin.com/in/kofie-knowles/
