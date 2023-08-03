@@ -24,7 +24,7 @@
     <jsp:include page="/WEB-INF/partials/update_password.jsp"/>
     <jsp:include page="/WEB-INF/partials/delete_user.jsp"/>
 </main>
-
+    <jsp:include page="/WEB-INF/partials/footer.jsp" />
 <jsp:include page="/WEB-INF/partials/error_message.jsp"/>
 </body>
 </html>

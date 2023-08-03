@@ -51,5 +51,6 @@
     <%-- Add a link to go back to the list of ads --%>
     <a href="/ads">Back to Ads List</a>
 </div>
+<jsp:include page="/WEB-INF/partials/footer.jsp" />
 </body>
 </html>
